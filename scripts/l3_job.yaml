@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: aha-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: gpu-container
+        image: jinwei/imagehome:lastest
+        imagePullPolicy: Always
+        command: ["/bin/bash"]
+        args: ["git clone https://github.com/KarlXing/CHASE-CI-Tutorial.git  /pv/CHASE-CI-Tutorial;
+                cd /pv/CHASE-CI-Tutorial;
+                python scripts/l1.py;"]
+        volumeMounts:
+        - name: pv
+          mountPath: /pv
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+            memory: 20Gi
+            cpu: 6
+          requests:
+            memory: 10Gi
+            cpu: 3
+      volumes:
+      - name: pv
+        persistentVolumeClaim:
+          claimName: aha-pvc
+      restartPolicy: Never
