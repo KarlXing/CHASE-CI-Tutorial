@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: aha-pod-l2
+spec:
+  containers:
+  - name: container-name
+    image: jinwei/imagehome:latest
+    command: ["/bin/sh"]
+    args: ["sleep", "36500000"]
+    imagePullPolicy: Always
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+        memory: 2Gi
+        cpu: 2
+      requests:
+        nvidia.com/gpu: 1
+        memory: 2Gi
+        cpu: 1
+    volumeMounts:
+      - name: pv
+        mountPath: /pv
+  restartPolicy: Never
+  volumes:
+    - name: pv
+      persistentVolumeClaim:
+        claimName: aha-pvc
