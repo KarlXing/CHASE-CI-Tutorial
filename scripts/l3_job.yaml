@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       containers:
-      - name: gpu-container
+      - name: container-name
         image: jinwei/imagehome:lastest
         imagePullPolicy: Always
         command: ["/bin/bash"]
