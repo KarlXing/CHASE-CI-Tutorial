@@ -1,5 +1,5 @@
 # CHASE-CI-Tutorial
-CHASE-CI stands for Cognitive Hardware and Software Ecosystem Community Infrastructure. It's now maintained by UCSD and provides computing resources for researchers. This is really a good news for some computational heavy work. So this tutorial is designed to help beginners to learn how to use it via a simple curriculum. I hope these 'lessons' could help you to have a basic understanding about how everything works and be able to handle most common computational tasks. Feel free to open issues if you have any questions or suggestions about this repo. If you think this repo is helpful, please consider to give it a star. Thanks!
+CHASE-CI stands for Cognitive Hardware and Software Ecosystem Community Infrastructure. It's now maintained by UCSD and provides computing resources for researchers. This is really a good news for some computational heavy work. So this tutorial is designed to help beginners to learn how to use it via a simple curriculum. I hope these 'lessons' could help you to have a basic understanding about how everything works and be able to handle most common computational tasks. Feel free to open issues if you have any questions or suggestions about this repo.
 
 
 # Preparation
@@ -15,7 +15,7 @@ Before we really start our lessons, you need to have kubectl tool installed and 
    - (option 2) If someone from your lab already has admin access, ask to add as a user to his/her namespaces(s).
 
 # Curriculum
-I'd like to divide the tutorial into intermediate levels and advanced levels. After going through the intermediate ones, you should have an understanding about how CHASE-CI works and be able to do most of your work. Advanced ones could help you to do the work more efficiently and could also be necessary for some certain tasks. 
+I'd like to divide the tutorial into intermediate levels and advanced levels. After going through the intermediate ones, you should have an understanding about how CHASE-CI works and be able to do most of your work. Advanced ones could help you to do the work more efficiently and could also be necessary for some certain tasks.
 
 * Lesson1-Intermediate: Create, Use and Delete Pods
 * Lesson2-Intermediate: Use Persistent Volumes
@@ -24,14 +24,47 @@ I'd like to divide the tutorial into intermediate levels and advanced levels. Af
 * Lesson5-Adanced: Customized Docker Images (coming soon)
 
 
-Great! Before we start, let's first clone this repo to your local computer since some scripts in this repo are necessary 'course materials'. 
+# CARLsim
+Feel free to skip the lessons in the previous paragraph if you're familiar with Kubernetes. I created docker images for CARLsim5 (https://hub.docker.com/repository/docker/jinwei/carlsim5) and CARLsim6 (https://hub.docker.com/repository/docker/jinwei/carlsim6). This allows us to use CHASE-CI to run CARLsim projects without spending time on installation and configuration.  
+
+Here is the example.
 
 ```
-git clone https://github.com/KarlXing/CHASE-CI-Tutorial.git  ~/CHASE-CI-Tutorial
-cd ~/CHASE-CI-Tutorial
+git clone https://github.com/KarlXing/CHASE-CI-Tutorial.git  ~/CHASE-CI-Tutorial   
+cd ~/CHASE-CI-Tutorial     
+kubectl create -f scripts/pod_carlsim5.yml    
+kubectl create -f scripts/pod_carlsim6.yml   
 ```
 
-Now you could go through the lessons in this repo! 
+Run ``kubectl get pod``, you should see pods of carlsim5 and carlsim6. Then you can login to carlsim5 or carlsim6 to run projects. 
+
+### CARLsim5  
+Compile and run hello_world like below.   
+```
+ kubectl exec --stdin --tty carlsim5  -- /bin/bash  
+ cd ~/CARLsim5/projects/hello_world   
+ make distclean  
+ make
+ ./hello_world   
+```  
+
+### CARLsim6
+I still have issues with compiling projects in CARLsim6 after installation. However, installation itself works and projects compiled along with installation could run well. The installation is quite different from carlsim5 and is conducted following [https://github.com/UCI-CARL/CARLsim6](https://github.com/UCI-CARL/CARLsim6) (replace /home/user1 with /root). 
+You may run the executable file of hello_world compiled along with installation like below.
+```
+ kubectl exec --stdin --tty carlsim6  -- /bin/bash  
+ cd ~/carlsim6/samples
+ ./hello_world   
+```  
+
+
+
+
+
+
+
+
+
 
 
 

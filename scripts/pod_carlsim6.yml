@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: carlsim6
+spec:
+  containers:
+  - name: container-name
+    image: jinwei/carlsim6:cuda11.2-compute75
+    args: ["sleep", "36500000"]
+    imagePullPolicy: Always
+    resources:
+      limits:
+        nvidia.com/gpu: '1'
+        memory: 8Gi
+        cpu: '2'
+      requests:
+        nvidia.com/gpu: '1'
+        memory: 2Gi
+        cpu: '1'
+  restartPolicy: Never
+  nodeSelector:
+    gpu-type: 2080Ti
