@@ -7,7 +7,7 @@ spec:
   - name: container-name
     image: jinwei/imagehome:latest
     command: ["/bin/sh"]
-    args: ["sleep", "36500000"]
+    args: ["-c", "sleep 36500000"]
     imagePullPolicy: Always
     resources:
       limits:
