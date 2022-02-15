@@ -22,7 +22,7 @@ spec:
       - name: container-name
 ```
 
-Once the job is done, the file would have been wrote to the persistent volume. To get the file, you might need to create a pod with that volume mounted and use **kubectl cp** to download it to your local machine. 
+Once the job is done, the file would have been wrote to the persistent volume. To get the file, you might need to create a pod with that volume mounted and use **kubectl cp** to download it to your local machine (as demonstrated in Lesson 1 & 2). 
 
 Sometimes, you may have a problem of submitting a job and get an error like 
 > Error from server: error when creating "scripts/l3_job.yaml": admission webhook "job.nautilus.optiputer.net" denied the request: Your pods resources utilization is too low. See your stats at https://nautilus.optiputer.net for details.
