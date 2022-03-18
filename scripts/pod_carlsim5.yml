@@ -17,6 +17,13 @@ spec:
         nvidia.com/gpu: '1'
         memory: 2Gi
         cpu: '1'
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: nvidia.com/gpu.product
+            operator: In
+            values:
+            - NVIDIA-GeForce-GTX-1080-Ti
   restartPolicy: Never
-  nodeSelector:
-    gpu-type: 1080Ti

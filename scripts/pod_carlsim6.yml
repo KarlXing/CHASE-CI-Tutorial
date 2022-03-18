@@ -17,6 +17,13 @@ spec:
         nvidia.com/gpu: '1'
         memory: 2Gi
         cpu: '1'
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: nvidia.com/gpu.product
+            operator: In
+            values:
+            - NVIDIA-GeForce-RTX-2080-Ti
   restartPolicy: Never
-  nodeSelector:
-    gpu-type: 2080Ti
